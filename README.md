@@ -1,6 +1,10 @@
 # TradingPal for Claude Code, Codex and Cursor
 
-TradingPal finds breakout patterns on stocks & crypto: the wedges, pennants and triangles price squeezes into before a big move. It scans every night, runs quality controls on every pattern so only clean ones reach you (geometry, touch spacing, line crossings), and shows the win rate behind each one from twenty years of history, for the pattern and for the ticker. This repository packages the [TradingPal MCP server](https://tradingpal.io/developers/mcp) and its skill as a plugin, so an agent can answer "what is setting up on my tickers?" with the setups, the two lines to draw, the trigger, stop and target, the track record behind them and a chart image.
+TradingPal helps you find better breakout patterns on stocks & crypto, faster. It looks at the entire market for wedges, pennants and triangles that form right before a large run.
+
+Based on research and backtesting, we sift out poorly formed patterns and ones with poor historical results. Each pattern comes with its historical win rate and a suggested entry, stop and target.
+
+This repository packages the [TradingPal MCP server](https://tradingpal.io/developers/mcp) and its skill as a plugin, so an agent can answer "what is setting up on my tickers?" with the setups, the two lines to draw, the trigger, stop and target, the track record behind them and a chart image.
 
 No key to copy: the plugin connects to `https://api.tradingpal.io/mcp`, and the first time it is used your agent opens the browser so you can sign in to TradingPal and approve the connection. The approval becomes a key named after the app on your [keys page](https://tradingpal.io/developers/keys), where you can revoke it any time. Docs for everything: [tradingpal.io/developers](https://tradingpal.io/developers).
 

@@ -1,9 +1,8 @@
 ---
 name: tradingpal
 description: >-
-  Read TradingPal's quality-checked breakout patterns (the wedges, pennants and
-  triangles price squeezes into before a big move) on the stocks & crypto the
-  user tracks:
+  Read TradingPal's breakout patterns (wedges, pennants and triangles that form
+  right before a large run) on the stocks & crypto the user tracks:
   current setups with lines, trigger, stop and target, the 20-year track
   record per pattern family and per ticker, past occurrences with outcomes,
   and a chart image. Use when the user asks what is setting up on a stock or crypto ticker,
@@ -13,7 +12,7 @@ description: >-
 
 # TradingPal pattern API
 
-> TradingPal finds breakout patterns on stocks & crypto: the wedges, pennants and triangles price squeezes into before a big move. It scans every night, runs quality controls on every pattern so only clean ones reach you (geometry, touch spacing, line crossings), and shows the win rate behind each one from 20 years of history, for the pattern family and for the ticker. This API and MCP server give an agent the current setups on the tickers its user tracks, the lines and levels to draw, the track record behind them, past occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly result the site serves.
+> TradingPal helps you find better breakout patterns on stocks & crypto, faster. It looks at the entire market for wedges, pennants and triangles that form right before a large run. Based on research and backtesting, we sift out poorly formed patterns and ones with poor historical results. Each pattern comes with its historical win rate and a suggested entry, stop and target. This API and MCP server give an agent the current setups on the tickers its user tracks, the lines and levels to draw, the track record behind them, past occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly result the site serves.
 
 Base URL: `https://api.tradingpal.io/api/v1`. MCP endpoint: `https://api.tradingpal.io/mcp` (Streamable HTTP). Human docs and key management: https://tradingpal.io/developers. Machine index: `GET https://api.tradingpal.io/api/v1/` (JSON). OpenAPI 3.1: `https://api.tradingpal.io/api/v1/openapi.json`. This file: `https://api.tradingpal.io/api/v1/llms.txt`. Installable skill: `https://api.tradingpal.io/api/v1/skill.md`.
 

@@ -1,12 +1,12 @@
 {
   "name": "tradingpal",
-  "description": "Quality-checked breakout patterns on stocks & crypto for coding agents, from TradingPal",
+  "description": "Better breakout patterns on stocks & crypto, faster, for coding agents, from TradingPal",
   "owner": { "name": "TradingPal", "url": "https://tradingpal.io" },
   "plugins": [
     {
       "name": "tradingpal",
       "source": "./plugins/tradingpal",
-      "description": "Quality-checked breakout patterns forming on the stocks & crypto you track: the two lines, the trigger, stop and target, the 20-year win rate, past occurrences and a chart image, from TradingPal's nightly scan.",
+      "description": "Breakout patterns forming on the stocks & crypto you track, with the historical win rate, a suggested entry, stop and target, past occurrences and a chart image, from TradingPal's nightly scan.",
       "category": "finance",
       "homepage": "https://tradingpal.io/developers",
       "keywords": ["trading", "stocks", "crypto", "breakout patterns", "breakouts", "backtest", "mcp"]

@@ -1,7 +1,7 @@
 {
   "name": "tradingpal",
   "version": "0.1.0",
-  "description": "Quality-checked breakout patterns forming on the stocks & crypto you track: the two lines, the trigger, stop and target, the 20-year win rate, past occurrences and a chart image, from TradingPal's nightly scan.",
+  "description": "Breakout patterns forming on the stocks & crypto you track, with the historical win rate, a suggested entry, stop and target, past occurrences and a chart image, from TradingPal's nightly scan.",
   "author": { "name": "TradingPal", "url": "https://tradingpal.io" },
   "homepage": "https://tradingpal.io/developers",
   "repository": "https://github.com/rendude/tradingpal-plugins",
