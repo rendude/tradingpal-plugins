@@ -1,15 +1,15 @@
 {
   "name": "tradingpal",
-  "description": "TradingPal's chart-pattern tools for coding agents",
+  "description": "Breakout patterns on stocks & crypto for coding agents, from TradingPal",
   "owner": { "name": "TradingPal", "url": "https://tradingpal.io" },
   "plugins": [
     {
       "name": "tradingpal",
       "source": "./plugins/tradingpal",
-      "description": "Chart patterns on the tickers you track: the lines, the trigger, stop and target, the 20-year track record, past occurrences and a chart image, from TradingPal's nightly run.",
+      "description": "Breakout patterns forming on the stocks & crypto you track: the two lines, the trigger, stop and target, the 20-year win rate, past occurrences and a chart image, from TradingPal's nightly scan.",
       "category": "finance",
       "homepage": "https://tradingpal.io/developers",
-      "keywords": ["trading", "stocks", "crypto", "chart patterns", "breakouts", "backtest", "mcp"]
+      "keywords": ["trading", "stocks", "crypto", "breakout patterns", "breakouts", "backtest", "mcp"]
     }
   ]
 }

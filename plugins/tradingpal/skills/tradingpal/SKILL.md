@@ -1,7 +1,8 @@
 ---
 name: tradingpal
 description: >-
-  Read TradingPal's detected chart patterns for the tickers the user tracks:
+  Read TradingPal's breakout patterns (the wedges, pennants and triangles price
+  squeezes into before a big move) on the stocks & crypto the user tracks:
   current setups with lines, trigger, stop and target, the 20-year track
   record per pattern family and per ticker, past occurrences with outcomes,
   and a chart image. Use when the user asks what is setting up on a stock or crypto ticker,
@@ -11,7 +12,7 @@ description: >-
 
 # TradingPal pattern API
 
-> TradingPal detects chart patterns (wedges, pennants, triangles) on stocks & crypto every night and keeps a 20-year record of how each pattern family and each ticker resolved. This API and MCP server give an agent the current setups on the tickers its user tracks, the lines and levels to draw, the track record behind them, past occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly artifact the site serves.
+> TradingPal finds breakout patterns on stocks & crypto: the wedges, pennants and triangles price squeezes into before a big move. It scans every night and keeps a 20-year record of how often each pattern family, and each ticker, paid off. This API and MCP server give an agent the current setups on the tickers its user tracks, the lines and levels to draw, the track record behind them, past occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly result the site serves.
 
 Base URL: `https://api.tradingpal.io/api/v1`. MCP endpoint: `https://api.tradingpal.io/mcp` (Streamable HTTP). Human docs and key management: https://tradingpal.io/developers. Machine index: `GET https://api.tradingpal.io/api/v1/` (JSON). OpenAPI 3.1: `https://api.tradingpal.io/api/v1/openapi.json`. This file: `https://api.tradingpal.io/api/v1/llms.txt`. Installable skill: `https://api.tradingpal.io/api/v1/skill.md`.
 
