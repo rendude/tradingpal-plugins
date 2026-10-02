@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tradingpal": {
+      "type": "http",
+      "url": "https://api.tradingpal.io/mcp"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "tradingpal",
+  "description": "TradingPal's chart-pattern tools for coding agents",
+  "owner": { "name": "TradingPal", "url": "https://tradingpal.io" },
+  "plugins": [
+    {
+      "name": "tradingpal",
+      "source": "./plugins/tradingpal",
+      "description": "Chart patterns on the tickers you track: the lines, the trigger, stop and target, the 20-year track record, past occurrences and a chart image, from TradingPal's nightly run.",
+      "category": "finance",
+      "homepage": "https://tradingpal.io/developers",
+      "keywords": ["trading", "stocks", "chart patterns", "breakouts", "backtest", "mcp"]
+    }
+  ]
+}
