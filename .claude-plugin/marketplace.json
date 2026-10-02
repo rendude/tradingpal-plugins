@@ -9,7 +9,7 @@
       "description": "Chart patterns on the tickers you track: the lines, the trigger, stop and target, the 20-year track record, past occurrences and a chart image, from TradingPal's nightly run.",
       "category": "finance",
       "homepage": "https://tradingpal.io/developers",
-      "keywords": ["trading", "stocks", "chart patterns", "breakouts", "backtest", "mcp"]
+      "keywords": ["trading", "stocks", "crypto", "chart patterns", "breakouts", "backtest", "mcp"]
     }
   ]
 }

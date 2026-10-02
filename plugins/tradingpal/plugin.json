@@ -7,7 +7,7 @@
   "homepage": "https://tradingpal.io/developers",
   "repository": "https://github.com/rendude/tradingpal-plugins",
   "license": "MIT",
-  "keywords": ["trading", "stocks", "chart patterns", "breakouts", "backtest", "mcp"],
+  "keywords": ["trading", "stocks", "crypto", "chart patterns", "breakouts", "backtest", "mcp"],
   "extensions": {
     "com.openai": {
       "interface": {
