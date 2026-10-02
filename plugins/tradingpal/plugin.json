@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "tradingpal",
   "version": "0.1.0",
-  "description": "Breakout patterns forming on the stocks & crypto you track: the two lines, the trigger, stop and target, the 20-year win rate, past occurrences and a chart image, from TradingPal's nightly scan.",
+  "description": "Quality-checked breakout patterns forming on the stocks & crypto you track: the two lines, the trigger, stop and target, the 20-year win rate, past occurrences and a chart image, from TradingPal's nightly scan.",
   "author": { "name": "TradingPal", "url": "https://tradingpal.io" },
   "homepage": "https://tradingpal.io/developers",
   "repository": "https://github.com/rendude/tradingpal-plugins",
@@ -12,7 +12,7 @@
     "com.openai": {
       "interface": {
         "displayName": "TradingPal",
-        "shortDescription": "Breakout setups, levels and win rates on your tickers",
+        "shortDescription": "Quality-checked breakout setups and win rates on your tickers",
         "category": "Finance",
         "websiteURL": "https://tradingpal.io/developers",
         "privacyPolicyURL": "https://tradingpal.io/privacy"
