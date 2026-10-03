@@ -4,9 +4,9 @@ TradingPal helps you find better breakout patterns on stocks & crypto, faster. I
 
 Based on research and backtesting, we sift out poorly formed patterns and ones with poor historical results. Each pattern comes with its historical win rate and a suggested entry, stop and target.
 
-This repository packages the [TradingPal MCP server](https://tradingpal.io/developers/mcp) and its skill as a plugin, so an agent can answer "what is setting up on my tickers?" with the setups, the two lines to draw, the trigger, stop and target, the track record behind them and a chart image.
+This repository packages the [TradingPal MCP server](https://tradingpal.io/developers/mcp) and its skill as a plugin, so an agent can answer "what did the scan find last night?" and "what is setting up on my tickers?" with the ranked setups, the two lines to draw, the trigger, stop and target, the track record behind them and a chart image.
 
-No key to copy: the plugin connects to `https://api.tradingpal.io/mcp`, and the first time it is used your agent opens the browser so you can sign in to TradingPal and approve the connection. The approval becomes a key named after the app on your [keys page](https://tradingpal.io/developers/keys), where you can revoke it any time. Docs for everything: [tradingpal.io/developers](https://tradingpal.io/developers).
+No key to copy: the plugin connects to `https://api.tradingpal.io/mcp`, and the first time it is used your agent opens the browser so you can sign in to TradingPal and approve the connection. The approval becomes a key named after the app on your [keys page](https://tradingpal.io/developers/keys), where you can revoke it any time. The tools answer on the [API plan](https://tradingpal.io/developers/quickstart) ($30/month, includes Premium). Docs for everything: [tradingpal.io/developers](https://tradingpal.io/developers).
 
 ## Claude Code
 
@@ -15,7 +15,7 @@ claude plugin marketplace add rendude/tradingpal-plugins
 claude plugin install tradingpal@tradingpal
 ```
 
-Then run `/mcp`, pick `tradingpal` and sign in. Ask: "What is setting up on my tickers?"
+Then run `/mcp`, pick `tradingpal` and sign in. Ask: "What did the scan find last night?"
 
 ## Codex
 

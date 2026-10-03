@@ -1,7 +1,7 @@
 {
   "name": "tradingpal",
   "version": "0.1.0",
-  "description": "Breakout patterns forming on the stocks & crypto you track, with the historical win rate, a suggested entry, stop and target, past occurrences and a chart image, from TradingPal's nightly scan.",
+  "description": "What TradingPal's nightly scan found across stocks & crypto, ranked, and the breakout patterns forming on the tickers you track, each with the historical win rate, a suggested entry, stop and target, and a chart image.",
   "author": { "name": "TradingPal", "url": "https://tradingpal.io" },
   "homepage": "https://tradingpal.io/developers",
   "repository": "https://github.com/rendude/tradingpal-plugins",
