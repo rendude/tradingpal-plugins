@@ -6,7 +6,7 @@ Based on research and backtesting, we sift out poorly formed patterns and ones w
 
 This repository packages the [TradingPal MCP server](https://tradingpal.io/developers/mcp) and its skill as a plugin, so an agent can answer "what did the scan find last night?" and "what is setting up on my tickers?" with the ranked setups, the two lines to draw, the trigger, stop and target, the track record behind them and a chart image.
 
-No key to copy: the plugin connects to `https://api.tradingpal.io/mcp`, and the first time it is used your agent opens the browser so you can sign in to TradingPal and approve the connection. The approval becomes a key named after the app on your [keys page](https://tradingpal.io/developers/keys), where you can revoke it any time. The tools answer on the [API plan](https://tradingpal.io/developers/quickstart) ($30/month, includes Premium). Docs for everything: [tradingpal.io/developers](https://tradingpal.io/developers).
+No key to copy: the plugin connects to `https://api.tradingpal.io/mcp`, and the first time it is used your agent opens the browser so you can sign in to TradingPal and approve the connection. The approval becomes a key named after the app on your [keys page](https://tradingpal.io/developers/keys), where you can revoke it any time. The tools answer on [Premium+](https://tradingpal.io/developers/quickstart) ($30/month, everything in Premium plus API and MCP access). Docs for everything: [tradingpal.io/developers](https://tradingpal.io/developers).
 
 ## Claude Code
 

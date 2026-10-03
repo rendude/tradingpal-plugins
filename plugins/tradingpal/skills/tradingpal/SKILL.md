@@ -10,7 +10,7 @@ description: >-
   break out, what is setting up on a stock or crypto ticker, how a pattern has
   performed, or for a chart of a setup. Needs a TradingPal signed-in MCP
   connection, or an API key (tp_live_…) in TRADINGPAL_API_KEY, on an account
-  with the API plan.
+  with Premium+.
 ---
 
 # TradingPal pattern API
@@ -29,7 +29,7 @@ Base URL: `https://api.tradingpal.io/api/v1`. MCP endpoint: `https://api.trading
 
 ## Plan
 
-The API and the MCP server are part of the **API plan**: $30/month, which includes TradingPal Premium. Premium alone does not unlock them. An account without the plan can connect and create keys, but every keyed route and tool answers `forbidden` with a `fix` pointing at https://tradingpal.io/developers/quickstart, where the user gets the plan (or switches an existing Premium subscription to it) in one step.
+The API and the MCP server are part of **Premium+**: $30/month, everything in Premium plus API and MCP access. Premium alone does not unlock them. An account without the plan can connect and create keys, but every keyed route and tool answers `forbidden` with a `fix` pointing at https://tradingpal.io/developers/quickstart, where the user gets the plan (or switches an existing Premium subscription to it) in one step.
 
 ## Connect
 
@@ -187,8 +187,8 @@ Numeric kinds take `op` (`<`, `<=`, `>`, `>=`, `=`) and `value`; choice and text
 | `daily_change` | op (<, <=, >, >=, =) and a number | % | One-day price change. |
 | `change_from_open` | op (<, <=, >, >=, =) and a number | % | Open to last, percent. |
 | `gap` | op (<, <=, >, >=, =) and a number | % | Opening gap. |
-| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 13w to 1m | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
-| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 13w to 1m | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 26w to 1w | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 26w to 1w | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
 | `asset_type` | value one of crypto, etf, stock |  | stock, etf or crypto. |
 | `exchange` | value, a label |  | Market identifier code: XNYS, XNAS, ARCX, BATS or XASE. |
 | `industry` | value, a label |  | One of: Semiconductors, Software, Hardware & Electronics, Internet & Media, Telecom, Biotech & Pharma, Healthcare Equipment & Services, Banks, Insurance, Capital Markets & Asset Management, Fintech & Payments, Real Estate, Oil & Gas, Utilities & Renewables, Metals & Mining, Chemicals & Materials, Industrials & Construction, Aerospace & Defense, Transport & Logistics, Retail & E-Commerce, Consumer Goods & Services, Food & Beverage, Restaurants, Travel & Leisure, Autos & Mobility, Crypto, Broad Market & Index, Bonds & Fixed Income, Commodities. |
@@ -230,7 +230,7 @@ From `/history`: `setup_id`, `lineage_id`, `family`, `family_label`, `pattern_ty
 |---|---|---|
 | `missing_api_key` | 401 | No `Authorization: Bearer tp_live_…` header |
 | `invalid_api_key` | 401 | Unknown or revoked key |
-| `forbidden` | 403 | The account is not on the API plan; the `fix` says where to get it |
+| `forbidden` | 403 | The account is not on Premium+; the `fix` says where to get it |
 | `ticker_not_tracked` | 403 | Add the ticker, then retry |
 | `rate_limited` | 429 | Wait `details.retry_after_seconds` |
 | `bad_request`, `invalid_symbol`, `unknown_symbol`, `ticker_cap_exceeded` | 400 | The message says which input |
