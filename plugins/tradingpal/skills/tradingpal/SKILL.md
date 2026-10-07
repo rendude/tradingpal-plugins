@@ -81,13 +81,13 @@ Families: `rising_wedge`, `falling_wedge`, `bullish_pennant`, `bearish_pennant`,
 | `get_scan(family?, direction?, status?, max_distance_pct?, filters?, limit?, offset?)` | yes | `GET /scan`. The one to call for "what did the scan find", "best setups tonight", "what is about to break out", or any screen the user describes (`filters`). |
 | `get_ticker_patterns(symbol)` | yes | `GET /tickers/{symbol}/patterns`. The one to call for "what is setting up on X". |
 | `get_pattern_history(symbol, limit?, outcome?)` | yes | `GET /tickers/{symbol}/history`: the last five occurrences |
-| `get_pattern_chart(symbol, setup_id)` | yes | The PNG as an image content block, plus `page_url` (the setup on the TradingPal site, the link to give the user) and `chart_url`, a keyless link to the same PNG that is good for a week; in ChatGPT and Claude the setup shows as a card with the image |
+| `get_pattern_chart(symbol, setup_id)` | yes | The PNG as an image content block, plus `page_url` (the setup on the TradingPal site, the link to give the user); the result's `_meta` carries `io.tradingpal/chart_url`, a keyless link to the same PNG that is good for a week, for code and app cards; in ChatGPT and Claude the setup shows as a card with the image |
 | `list_tracked_tickers()` | yes | `GET /tickers`: the account's My watchlist on the site, with the account's email |
 | `add_tickers(symbols)` | yes | `PATCH /tickers` with `add`: starts tracking, leaves the rest alone. Call it when the user says "track NVDA" |
 | `remove_tickers(symbols)` | yes | `PATCH /tickers` with `remove`: stops tracking, leaves the rest alone |
 | `set_tracked_tickers(symbols)` | yes | `PUT /tickers`: replaces the list from scratch, so include the tickers to keep; prefer add_tickers and remove_tickers for changes |
 | `get_family_track_record(family?)` | no | `GET /families` or `GET /families/{family}/stats` |
-| `demo(symbol)` | no | The keyless demo, with the first setup's chart as an image and its `chart_url` |
+| `demo(symbol)` | no | The keyless demo, with the first setup's chart as an image and its link in `_meta` |
 
 Tool results carry the JSON payload as text and as `structuredContent`; errors come back as tool errors whose text starts with the error code and ends with the fix.
 
