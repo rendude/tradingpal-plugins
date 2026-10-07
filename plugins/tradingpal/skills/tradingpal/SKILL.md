@@ -131,6 +131,15 @@ One current pattern on a ticker, from `/patterns` (field values illustrative):
 - `touches` are the bars that touched the line (date and the bar's high or low), so a charting tool can reproduce the fit.
 - `track_record.ticker` is null when the ticker has no resolved history for that family.
 
+### Stock facts
+
+`/patterns` (`get_ticker_patterns`), the chart tool and the demo also carry `stock_facts`, once per ticker beside `setups`: the ticker's facts as the TradingPal screener's quick view shows them, in its groups (Price, Performance, Momentum, Volume and volatility, Company or Asset), each row a label and a ready value. Keep the labels and values as given. Null when the ticker has no current facts; scan rows leave them out to stay small.
+
+```json
+{"as_of": "Facts as of the Sep 25 close.",
+ "sections": [{"title": "Momentum", "rows": [{"label": "EMA8 vs EMA21", "value": "+2.5%"}, {"label": "RSI (14)", "value": "59"}]}]}
+```
+
 ## Scan
 
 `GET /scan` returns the ranked book of the last nightly run: every setup forming across the whole market (`status=forming`, the default), the ones that have triggered and are running (`status=in_progress`), or both (`status=all`). The order is the TradingPal screener's order, and `rank` is the position in it: rank 1 is the best-ranked setup of the night. Ranks are assigned over the whole book before any filter, so narrowing by `family`, `direction` or `max_distance_pct` keeps each row's rank. Outcomes are never served here.
@@ -193,8 +202,8 @@ Numeric kinds take `op` (`<`, `<=`, `>`, `>=`, `=`) and `value`; choice and text
 | `daily_change` | op (<, <=, >, >=, =) and a number | % | One-day price change. |
 | `change_from_open` | op (<, <=, >, >=, =) and a number | % | Open to last, percent. |
 | `gap` | op (<, <=, >, >=, =) and a number | % | Opening gap. |
-| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 2m to 52w | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
-| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 2m to 52w | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window (1w, 2w, 4w, 13w, 26w, 52w, 1m, 2m, 3m, 6m, 12m) | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window (1w, 2w, 4w, 13w, 26w, 52w, 1m, 2m, 3m, 6m, 12m) | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
 | `asset_type` | value one of crypto, etf, stock |  | stock, etf or crypto. |
 | `exchange` | value, a label |  | Market identifier code: XNYS, XNAS, ARCX, BATS or XASE. |
 | `industry` | value, a label |  | One of: Semiconductors, Software, Hardware & Electronics, Internet & Media, Telecom, Biotech & Pharma, Healthcare Equipment & Services, Banks, Insurance, Capital Markets & Asset Management, Fintech & Payments, Real Estate, Oil & Gas, Utilities & Renewables, Metals & Mining, Chemicals & Materials, Industrials & Construction, Aerospace & Defense, Transport & Logistics, Retail & E-Commerce, Consumer Goods & Services, Food & Beverage, Restaurants, Travel & Leisure, Autos & Mobility, Crypto, Broad Market & Index, Bonds & Fixed Income, Commodities. |
