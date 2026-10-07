@@ -6,7 +6,7 @@
     {
       "name": "tradingpal",
       "source": "./plugins/tradingpal",
-      "description": "What TradingPal's nightly scan found across stocks & crypto, ranked, and the breakout patterns forming on the tickers you track, each with the historical win rate, a suggested entry, stop and target, and a chart image.",
+      "description": "What TradingPal's nightly scan found across stocks & crypto, ranked, and the breakout patterns forming on any ticker you ask about, each with the historical win rate, a suggested entry, stop and target, and a chart image.",
       "category": "finance",
       "homepage": "https://tradingpal.io/developers",
       "keywords": ["trading", "stocks", "crypto", "breakout patterns", "breakouts", "backtest", "mcp"]
