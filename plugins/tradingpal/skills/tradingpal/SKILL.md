@@ -3,8 +3,8 @@ name: tradingpal
 description: >-
   Read TradingPal's breakout patterns (wedges, pennants and triangles that form
   right before a large run) on stocks & crypto: what the nightly scan found
-  across the whole market, ranked, and the setups on the tickers the user
-  tracks, each with lines, trigger, stop and target, the 20-year track record
+  across the whole market, ranked, and the setups on any ticker, each with
+  lines, trigger, stop and target, the 20-year track record
   per pattern family and per ticker, the last occurrences with outcomes, and a
   chart image. Use when the user asks what the scan found, what is about to
   break out, what is setting up on a stock or crypto ticker, how a pattern has
@@ -15,7 +15,7 @@ description: >-
 
 # TradingPal pattern API
 
-> TradingPal helps you find better breakout patterns on stocks & crypto, faster. It looks at the entire market for wedges, pennants and triangles that form right before a large run. Based on research and backtesting, we sift out poorly formed patterns and ones with poor historical results. Each pattern comes with its historical win rate and a suggested entry, stop and target. This API and MCP server give an agent what the nightly scan found across the whole market, ranked, and the current setups on the tickers its user tracks, with the lines and levels to draw, the track record behind each one, the last occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly result the site serves.
+> TradingPal helps you find better breakout patterns on stocks & crypto, faster. It looks at the entire market for wedges, pennants and triangles that form right before a large run. Based on research and backtesting, we sift out poorly formed patterns and ones with poor historical results. Each pattern comes with its historical win rate and a suggested entry, stop and target. This API and MCP server give an agent what the nightly scan found across the whole market, ranked, and the current setups on any ticker, with the lines and levels to draw, the track record behind each one, the last occurrences with outcomes, and a chart image. Nothing is computed per request; every answer is the same stored nightly result the site serves.
 
 Base URL: `https://api.tradingpal.io/api/v1`. MCP endpoint: `https://api.tradingpal.io/mcp` (Streamable HTTP). Human docs and key management: https://tradingpal.io/developers. Machine index: `GET https://api.tradingpal.io/api/v1/` (JSON). OpenAPI 3.1: `https://api.tradingpal.io/api/v1/openapi.json`. This file: `https://api.tradingpal.io/api/v1/llms.txt`. Installable skill: `https://api.tradingpal.io/api/v1/skill.md`.
 
@@ -25,11 +25,11 @@ Base URL: `https://api.tradingpal.io/api/v1`. MCP endpoint: `https://api.trading
 2. **Say which session the data describes.** Every response carries `as_of_session` (the last trading day the nightly covered). Setups change nightly; do not cache them across days.
 3. **Lines are two dated endpoints on a log-scale chart.** Draw a straight line between `start` and `end` with the price axis in log scale. There is no slope field on purpose.
 4. **This is educational chart analysis, not advice.** Repeat the `disclaimer` when presenting a setup as something the user might act on.
-5. **The scan is the whole market; tracked tickers are the user's own.** `GET /scan` (`get_scan`) needs no tracked ticker. Pattern, history and chart calls work only on tickers the account tracks; when one fails with `ticker_not_tracked`, add the ticker (the error's `fix` says how) and retry.
+5. **Any ticker can be looked up; tracked tickers are the user's own list.** `GET /scan` (`get_scan`) covers the whole market, and the pattern, history and chart calls work on any ticker the nightly covers, tracked or not. The tracked tickers are the user's My watchlist on the site; change them only when the user asks.
 
 ## Plan
 
-The API and the MCP server are part of **Premium+**: $30/month, everything in Premium plus API and MCP access. Premium alone does not unlock them. An account without the plan can connect and create keys, but every keyed route and tool answers `forbidden` with a `fix` pointing at https://tradingpal.io/developers/quickstart, where the user gets the plan (or switches an existing Premium subscription to it) in one step.
+API and MCP access requires **Premium+** subscription at $30/month (or $300/year): all of the benefits in Premium plus API and MCP access. Premium alone does not unlock them. A first subscription starts with 14 days free; the card is billed when it ends unless the user cancels. An account without the plan can connect and create keys, but every keyed route and tool answers `forbidden` with a `fix` pointing at https://tradingpal.io/developers/quickstart, where the user gets the plan (or switches an existing Premium subscription to it) in one step.
 
 ## Connect
 
@@ -61,8 +61,9 @@ Trailing slashes are optional. All responses are JSON except `chart.png`.
 | `GET /me` | yes | The key, plan, limits and tracked-ticker count |
 | `GET /scan?status=forming&family=&direction=&max_distance_pct=&filters=[…]&limit=50&offset=0` | yes | What the nightly scan found across the whole market, ranked, narrowed by the screener's own filters (see **Scan**) |
 | `GET /tickers` | yes | Tracked tickers, each with `covered` (true when the nightly covers it) |
+| `PATCH /tickers` body `{"add": ["NVDA"], "remove": ["AAPL"]}` | yes | Adds and removes tickers, leaving the rest alone; either list or both |
 | `PUT /tickers` body `{"symbols": ["NVDA", "AAPL"]}` | yes | Replaces the whole tracked set, all-or-nothing; `cap` says how many fit |
-| `GET /tickers/{symbol}/patterns` | yes | Current setups on one tracked ticker (see **Setup**) |
+| `GET /tickers/{symbol}/patterns` | yes | Current setups on one ticker, tracked or not (see **Setup**) |
 | `GET /tickers/{symbol}/history?limit=5&outcome=all` | yes | The last occurrences on that ticker with what happened next, newest first (the receipts behind its track record, at most 5); `outcome` is `all`, `resolved` or `open` |
 | `GET /tickers/{symbol}/chart.png?setup_id=…` | yes | PNG of one current setup: candles, both lines, trigger, stop, target |
 | `GET /families` | no | The five families with their track record |
@@ -80,11 +81,13 @@ Families: `rising_wedge`, `falling_wedge`, `bullish_pennant`, `bearish_pennant`,
 | `get_scan(family?, direction?, status?, max_distance_pct?, filters?, limit?, offset?)` | yes | `GET /scan`. The one to call for "what did the scan find", "best setups tonight", "what is about to break out", or any screen the user describes (`filters`). |
 | `get_ticker_patterns(symbol)` | yes | `GET /tickers/{symbol}/patterns`. The one to call for "what is setting up on X". |
 | `get_pattern_history(symbol, limit?, outcome?)` | yes | `GET /tickers/{symbol}/history`: the last five occurrences |
-| `get_pattern_chart(symbol, setup_id)` | yes | The PNG as an image content block, so the model and the user both see it |
-| `list_tracked_tickers()` | yes | `GET /tickers` |
-| `set_tracked_tickers(symbols)` | yes | `PUT /tickers`: replaces the list, so include the tickers to keep |
+| `get_pattern_chart(symbol, setup_id)` | yes | The PNG as an image content block, plus `page_url` (the setup on the TradingPal site, the link to give the user) and `chart_url`, a keyless link to the same PNG that is good for a week; in ChatGPT and Claude the setup shows as a card with the image |
+| `list_tracked_tickers()` | yes | `GET /tickers`: the account's My watchlist on the site, with the account's email |
+| `add_tickers(symbols)` | yes | `PATCH /tickers` with `add`: starts tracking, leaves the rest alone. Call it when the user says "track NVDA" |
+| `remove_tickers(symbols)` | yes | `PATCH /tickers` with `remove`: stops tracking, leaves the rest alone |
+| `set_tracked_tickers(symbols)` | yes | `PUT /tickers`: replaces the list from scratch, so include the tickers to keep; prefer add_tickers and remove_tickers for changes |
 | `get_family_track_record(family?)` | no | `GET /families` or `GET /families/{family}/stats` |
-| `demo(symbol)` | no | The keyless demo, with the first setup's chart as an image |
+| `demo(symbol)` | no | The keyless demo, with the first setup's chart as an image and its `chart_url` |
 
 Tool results carry the JSON payload as text and as `structuredContent`; errors come back as tool errors whose text starts with the error code and ends with the fix.
 
@@ -138,17 +141,20 @@ Each row is a **Setup** (above) plus:
 {
   "rank": 1,
   "expected_gain_pct": 6.8,
+  "win_rate_pct": 54.0,
+  "win_rate_trades": 31,
   "distance_to_trigger_pct": 3.69,
   "setup_id": "NVDA:D:falling_wedge:1", "symbol": "NVDA", "…": "the Setup fields"
 }
 ```
 
-- `expected_gain_pct` is the ranking value: the typical winning move for this pattern on this ticker, in percent, blended with the family's record (ticker evidence weighted by its trade count). Null when the setup is not ranked; unranked rows sort last.
+- `expected_gain_pct` is **Typical return**, as the TradingPal screener labels it, and the value the ranking sorts by: the typical winning move for this pattern on this ticker, in percent, blended with the family's record (ticker evidence weighted by its trade count). Null when the setup is not ranked; unranked rows sort last.
+- `win_rate_pct` is the win rate the screener shows on the setup, and `win_rate_trades` how many past trades it counts. Null without a track record.
 - `distance_to_trigger_pct` is how far the last close is from the trigger, in percent of the close, signed (positive: price must rise to reach it). Small means about to break out; `max_distance_pct=2` keeps the forming setups within 2%.
 - `count` says how many matched; page with `limit` (up to 200) and `offset`. The answer comes from a short cache, so page within a session.
 - `filters` runs the user's own screen: the same filter list the TradingPal screener takes, so "stocks over $10 with RSI under 40" is `filters=[{"kind":"price","op":">","value":10},{"kind":"rsi","op":"<","value":40},{"kind":"asset_type","value":"stock"}]` (URL-encode it on the REST route; the MCP tool takes the array). Every predicate must match, one per kind, and a setup with no evidence for a kind never matches. The response echoes them as `filters.predicates`. A malformed list answers 400 `bad_request` naming the predicate.
 
-Present the top few, not the list: for each, the family and direction, the symbol, the trigger, stop and target, the family `summary` sentence, and the ticker `summary` when present.
+Present the top few, not the list: for each, the rank, the symbol, the family and direction, and the three numbers the screener shows, named as it names them: Typical return (`expected_gain_pct`), Win rate (`win_rate_pct`, with `win_rate_trades` trades) and Distance to trigger (`distance_to_trigger_pct`); then the trigger, stop and target and the family `summary` sentence.
 
 ### Scan filters
 
@@ -187,8 +193,8 @@ Numeric kinds take `op` (`<`, `<=`, `>`, `>=`, `=`) and `value`; choice and text
 | `daily_change` | op (<, <=, >, >=, =) and a number | % | One-day price change. |
 | `change_from_open` | op (<, <=, >, >=, =) and a number | % | Open to last, percent. |
 | `gap` | op (<, <=, >, >=, =) and a number | % | Opening gap. |
-| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 26w to 1w | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
-| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 26w to 1w | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_high` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 2m to 52w | % | Percent below the period high; period 20, 50 or 252 sessions, or 1w to 12m. |
+| `distance_from_low` | op (<, <=, >, >=, =) and a number; period 20, 50, 252, or a calendar window 2m to 52w | % | Percent above the period low; period 20, 50 or 252 sessions, or 1w to 12m. |
 | `asset_type` | value one of crypto, etf, stock |  | stock, etf or crypto. |
 | `exchange` | value, a label |  | Market identifier code: XNYS, XNAS, ARCX, BATS or XASE. |
 | `industry` | value, a label |  | One of: Semiconductors, Software, Hardware & Electronics, Internet & Media, Telecom, Biotech & Pharma, Healthcare Equipment & Services, Banks, Insurance, Capital Markets & Asset Management, Fintech & Payments, Real Estate, Oil & Gas, Utilities & Renewables, Metals & Mining, Chemicals & Materials, Industrials & Construction, Aerospace & Defense, Transport & Logistics, Retail & E-Commerce, Consumer Goods & Services, Food & Beverage, Restaurants, Travel & Leisure, Autos & Mobility, Crypto, Broad Market & Index, Bonds & Fixed Income, Commodities. |
@@ -220,9 +226,9 @@ From `/history`: `setup_id`, `lineage_id`, `family`, `family_label`, `pattern_ty
 ## Errors
 
 ```json
-{"error": "ticker_not_tracked",
- "message": "NVDA is not one of the tickers this account tracks",
- "fix": "Add it to the tracked tickers (3 of 200 slots used): PUT /api/v1/tickers, or the set_tracked_tickers MCP tool.",
+{"error": "setup_not_found",
+ "message": "no current setup NVDA:D:falling_wedge:500 on NVDA",
+ "fix": "Setups change nightly; re-read the current patterns for the symbol.",
  "docs_url": "https://tradingpal.io/developers"}
 ```
 
@@ -231,7 +237,6 @@ From `/history`: `setup_id`, `lineage_id`, `family`, `family_label`, `pattern_ty
 | `missing_api_key` | 401 | No `Authorization: Bearer tp_live_…` header |
 | `invalid_api_key` | 401 | Unknown or revoked key |
 | `forbidden` | 403 | The account is not on Premium+; the `fix` says where to get it |
-| `ticker_not_tracked` | 403 | Add the ticker, then retry |
 | `rate_limited` | 429 | Wait `details.retry_after_seconds` |
 | `bad_request`, `invalid_symbol`, `unknown_symbol`, `ticker_cap_exceeded` | 400 | The message says which input |
 | `unknown_family`, `setup_not_found`, `chart_unavailable`, `not_a_demo_symbol` | 404 | The fix says what to call instead |
@@ -241,7 +246,7 @@ Tickers use the exchange symbol in upper case (`BRK.B`, not `BRK-B`). A ticker t
 ## Example: what did the scan find last night
 
 1. `GET /scan?limit=10` → the ten best-ranked forming setups across the market (`get_scan` with `limit: 10`). For "about to break out", add `max_distance_pct=2`; for one family, `family=falling_wedge`; for the user's own screen, `filters` (see **Scan filters**).
-2. Present each: rank, symbol, family and direction, the trigger price and rule, the stop and target, the family `summary` sentence, the ticker `summary` when present. Offer the chart (`/chart.png` works once the ticker is tracked).
+2. Present each: rank, symbol, family and direction, Typical return (`expected_gain_pct`), Win rate (`win_rate_pct`, with `win_rate_trades` trades), Distance to trigger (`distance_to_trigger_pct`), the trigger price and rule, the stop and target, and the family `summary` sentence. Offer the chart (`get_pattern_chart`, or `/chart.png`).
 3. End with `as_of_session` and the disclaimer.
 
 ## Example: what is setting up on my tickers
